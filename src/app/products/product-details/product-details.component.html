@@ -1,0 +1,145 @@
+<div class="row margin-bottom-0 hide-on-large-only" id="tab-header">
+    <ul class="tabs" id="tabs">
+        <li class="tab col">
+            <a href="#stores">Stores</a>
+        </li>
+        <li class="tab col">
+            <a href="#price">Price Alert</a>
+        </li>
+        <li class="tab col">
+            <a href="#keyspec">Key spec</a>
+        </li>
+        <li class="tab col">
+            <a href="#full-spec">Specifications</a>
+        </li>
+    </ul>
+</div>
+<div class="row product-details">
+    <div class="col s12">
+        <div id="flight-card" class="card">
+            <div class="card-header blue lighten-1">
+                <div class="card-title center">
+                    <h5 class="white-text">{{productDetailsVM.name}}</h5>
+                </div>
+            </div>
+            <div class="card-content white">
+                <div class="row">
+                    <div class="col s12 m4 l3 center">
+                        <ul class="collection collection-product">
+                            <li class="collection-header">
+                                <img src="{{productDetailsVM.imageurl}}" alt="{{productDetailsVM.name}}" class="responsive-img prod-image">
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col s12 m8 l9">
+                        <h5 class="product-detail-header">Product Description</h5>
+                        <div class="divider"></div>
+                        {{productDetailsVM.description}}
+                        <h5 class="product-detail-header">
+                            Product Highlights
+                        </h5>
+                        <div class="divider"></div>
+                        <ul id="keyspec" materialize="scrollSpy">
+                            <li *ngFor="let keySpec of productDetailsVM.keyspec | split">
+                                <i class="mdi-image-adjust tiny"></i>{{keySpec}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col s12 m12 l6">
+        <div class="card">
+            <div class="card-content">
+                <div class="row" id="stores" materialize="scrollSpy">
+                    <table class="" style="display: block;overflow-x: auto;white-space: nowrap;">
+                        <thead class="">
+                            <tr>
+                                <th class="price-col-store-width">Store</th>
+                                <th class="price-col-price-width">Price</th>
+                                <th class="price-col-offer-width">Offers</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let store of productDetailsVM.product.stores">
+                                <td>
+                                    <img src="assets/store-logo/{{store.logo}}" width="100" />
+                                </td>
+                                <td>
+                                    <p class="amber-text darken-1 product-price-compare">
+                                        {{store.pivot.price|indianCurrency}}
+                                    </p>
+                                    <button class="btn btn-shopnow">
+                                        <a class="white-text" target="_blank" href="product/{{store.slug}}?pid={{productDetailsVM.id}}">Shop Now</a>
+                                    </button>
+                                </td>
+                                <td>
+                                    <ul>
+                                        <li class="store-offer-text">
+                                            <i class="mdi-image-adjust"></i> 5% instant cashback for CITI cards
+                                        </li>
+                                        <li class="store-offer-text">
+                                            <i class="mdi-image-adjust"></i> Up to 5% cashback from PAISACLUB.COM
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="card">
+                <div class="card-content">
+                    <div class="row">
+                        <div class="col s12 m12 l12" id="full-spec" materialize="scrollSpy">
+                            <h5 class="product-detail-header">Product Specifications</h5>
+                            <div class="divider"></div>
+                            <div *ngFor="let spec of productDetailsVM.spec| Speckeys">
+                                <h5 class="spec-header">{{spec.key}}</h5>
+                                <table class="striped">
+                                    <tr *ngFor="let item of spec.value | keys">
+                                        <td class="spec-key">{{item.key}}</td>
+                                        <td class="spec-value">{{item.value}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col s12 m12 l6">
+        <section class="plans-container" id="plans">
+            <article class="col s12 m12 l12 padding-0" id="price" materialize="scrollSpy">
+                <div class="card z-depth-1">
+                    <div class="card-image pink darken-1 waves-effect">
+                        <div class="card-title">PRICE DROP ALERT</div>
+                        <div class="price">
+                            <i class="mdi-social-notifications-on"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <ul class="grey-text center">
+                            <li>
+                                Get notified when the product price goes low.
+                            </li>
+                            <li>
+                                Just enable price drop alert and purchase at the lowest cost.
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-action center-align">
+                        <button class="waves-effect waves-light pink btn">Alert Me</button>
+                    </div>
+                </div>
+            </article>
+        </section>
+    </div>
+</div>

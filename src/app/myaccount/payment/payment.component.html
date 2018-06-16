@@ -1,0 +1,154 @@
+<!--
+  ~ /* Copyright (C) Paisaclub.com - All Rights Reserved
+  ~  * Unauthorized copying of this file, via any medium is strictly prohibited
+  ~  * Proprietary and confidential
+  ~  * Written by Sathish Kumar(satz) <sathish.thi@gmail.com>
+  ~  */
+  -->
+
+<div class="row">
+    <div class="col s12 m6 l4">
+        <div class="card payment-card">
+            <div class="card-move-up waves-effect waves-block waves-light">
+                <div class="move-up cyan darken-1">
+                        <div>
+                            <h5 class="chart-title white-text"><i class="mdi-action-payment"></i> PAYMENT REQUEST</h5>
+                        </div>
+                </div>
+            </div>
+                <form class="card-content user-profile-content" [formGroup]="paymentForm" novalidate (ngSubmit)="paymentFormDetails(paymentForm.value,paymentForm.valid)">
+                <ul class="collection z-depth-1">
+                    <li class="collection-item">
+                        <div class="row">
+                            <div class="col s12 grey-text darken-1"><i class="mdi-toggle-check-box"></i> Minimum Eligible Amount to transfer</div>
+                            <div class="col s12 grey-text text-darken-4"><i class="mdi-rupee-symbol"></i>{{(paymentDetails | async)?.MinimumPaymentAmount}}</div>
+                        </div>
+                    </li>
+                    <li class="collection-item">
+                        <div class="row">
+                            <div class="col s12 grey-text darken-1"><i class="mdi-action-account-balance-wallet"></i> Available Balance</div>
+                            <div class="col s12 grey-text text-darken-4"><i class="mdi-rupee-symbol"></i>{{(paymentDetails | async)?.Balance}}
+                                <sub class="red-text right" *ngIf="!isEligibleAmount()"><i class="mdi-action-info"></i>Insufficient Balance</sub>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="collection-item">
+                        <div class="row">
+                            <div class="col s12 grey-text darken-1"><i class="mdi-action-account-balance"></i> Bank Account</div>
+                            <div class="col s12 grey-text text-darken-4">
+                                <span class="left">{{(paymentDetails | async)?.BankAccount}}</span>
+                                <a [routerLink]="['/myaccount/profile']"  class="btn btn-small right">Edit</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="collection-item">
+                        <div class="row">
+                            <div class="col s12 grey-text darken-1"><i class="mdi-notification-event-available"></i> Expected Credit Date (If requested
+                                now)
+                            </div>
+                            <div class="col s12 grey-text text-darken-4">23-05-2017</div>
+                        </div>
+                    </li>
+                    <li class="collection-item">
+                        <div class="row">
+                            <div class="col s12 grey-text text-darken-4">
+                                <input type="checkbox" id="transfer-confirm" formControlName="transfer_confirm" class="validate icon_prefix3" />
+                                <label for="transfer-confirm">I confirm that my bank details are correct</label>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="collection-item">
+                        <div class="row submit-button-row">
+                            <div class="col s12 center">
+                                <button [disabled]="!isEligibleAmount() || ((paymentDetails | async)?.BankAccount==='NA') || ((paymentDetails | async)?.IsAcknowledgementPending === true)"  type="submit" id="payment-request" class="ladda-button waves-effect waves-light btn btn-paisaclub-loader">Transfer Now</button>
+                                <div class="row" *ngIf="(isEligibleAmount() || ((paymentDetails | async)?.BankAccount==='NA')) && ((paymentDetails | async)?.IsAcknowledgementPending === false)">
+                                    <control-messages class="red-text"  [control]="paymentForm.get('transfer_confirm')"></control-messages>
+                                </div>
+                                <div class="row" *ngIf="((paymentDetails | async)?.IsAcknowledgementPending === true)">
+                                    <sub class="red-text"><i class="mdi-action-info"></i>Acknowledgement pending for previous payments</sub>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </div>
+    <div class="col s12 m6 l8">
+        <div class="card payment-card">
+            <div class="card-move-up waves-effect waves-block waves-light">
+                <div class="move-up pink darken-1">
+                        <div>
+                            <h5 class="chart-title white-text"><i class="mdi-notification-event-available"></i> PAYMENT HISTORY</h5>
+                        </div>
+                </div>
+            </div>
+            <div [ngClass]="(totalNumber>0)? 'card-content table-transactions':'card-content table-transactions-no-pager'">
+                <ng-template *ngIf="(paymentRequests | async)?.length > 0;then RequestAvailable else NoRequest"> </ng-template>
+                <ng-template #RequestAvailable>
+                <div id="responsive-table">
+                    <div class="row">
+                        <div class="col s12 m12 l12 table-overflow-y-500">
+                            <table class="responsive-table striped" id="table">
+                                <thead>
+                                <tr>
+                                    <th data-field="name">Transferred To</th>
+                                    <th data-field="price">Amount</th>
+                                    <th data-field="total">Requested On</th>
+                                    <th data-field="status">Status</th>
+                                    <th data-field="status">Remarks</th>
+                                    <th data-field="status">Acknowledged?</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let payment_history of paymentRequests | async">
+                                    <td>{{payment_history?.BankAccount}}</td>
+                                    <td><i class="mdi-rupee-symbol"></i>{{payment_history?.AmountRequested}}</td>
+                                    <td>{{payment_history?.RequestedOn}}</td>
+                                    <td>{{payment_history?.Status}}</td>
+                                    <td>{{payment_history?.Remarks}}</td>
+                                    <td>
+                                        <div class="payment-screen" *ngIf="(payment_history?.Status == 'Complete')">
+                                            <button *ngIf="!payment_history?.Acknowledged; else ack" (click)="submitAcknowledge(payment_history)" class="btn btn-small">Acknowledge</button>
+                                            <ng-template #ack><i class="material-icons mdi-action-done"></i></ng-template>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                </ng-template>
+                <ng-template #NoRequest>
+                    <div class="row">
+                        <div class="col s12 center padding-20">
+                            <span class="grey-text lighten-1">It's lonely here <i class="fa fa-meh-o"></i></span>
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
+            <div class="divider"></div>
+            <!-- pager -->
+            <div>
+                <ul *ngIf="pager.pages && pager.pages.length" class="pagination center">
+                    <li class="waves-effect" [ngClass]="{disabled:pager.currentPage == 1}">
+                        <a class="tooltipped" materialize="tooltip" data-position="bottom" data-tooltip="First" (click)="setPage(1)"><i class="mdi-av-skip-previous"></i></a>
+                    </li>
+                    <li class="waves-effect" [ngClass]="{disabled:pager.currentPage == 1}">
+                        <a class="tooltipped" materialize="tooltip" data-position="bottom" data-tooltip="previous" (click)="setPage(pager.currentPage - 1)"><i class="mdi-hardware-keyboard-arrow-left"></i></a>
+                    </li>
+                    <li class="waves-effect" *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage == page}">
+                        <a (click)="setPage(page)">{{page}}</a>
+                    </li>
+                    <li class="waves-effect" [ngClass]="{disabled:pager.currentPage == pager.totalPages}">
+                        <a class="tooltipped" materialize="tooltip" data-position="bottom" data-tooltip="Next" (click)="setPage(pager.currentPage + 1)"><i class="mdi-hardware-keyboard-arrow-right"></i></a>
+                    </li>
+                    <li class="waves-effect" [ngClass]="{disabled:pager.currentPage == pager.totalPages}">
+                        <a class="tooltipped" materialize="tooltip" data-position="bottom" data-tooltip="Last" (click)="setPage(pager.totalPages)"><i class="mdi-av-skip-next"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

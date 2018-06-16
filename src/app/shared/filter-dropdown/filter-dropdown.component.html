@@ -1,0 +1,17 @@
+<ul class="cd-filters" (click)="dropdown($event)">
+    <li class="filter" class="placeholder">
+        <a data-type="{{sortFilter.POPULARITY}}" class="place-holder" href="#0">{{sortFilter.POPULARITY}}</a>
+    </li>
+    <li class="filter">
+        <a class="selected" href="#0" data-type="{{sortFilter.POPULARITY}}">{{sortFilter.POPULARITY}}</a>
+    </li>
+    <li class="filter">
+        <a href="#0" data-type="{{sortFilter.PRICEHIGH}}">{{sortFilter.PRICEHIGH}}</a>
+    </li>
+    <li class="filter">
+        <a href="#0" data-type="{{sortFilter.PRICELOW}}">{{sortFilter.PRICELOW}}</a>
+    </li>
+    <li class="filter">
+        <a href="#0" data-type="{{sortFilter.NEWESTFIRST}}">{{sortFilter.NEWESTFIRST}}</a>
+    </li>
+</ul>

@@ -1,0 +1,122 @@
+/*!
+ *  Copyright (C) Paisaclub.com - All Rights Reserved
+ *  * Unauthorized copying of this file, via any medium is strictly prohibited
+ *  * Proprietary and confidential
+ *  * Written by Sathish Kumar(satz) <sathish.thi@gmail.com>
+ *
+ */
+
+ ::ng-deep #right-sidebar-nav >.side-nav {
+  max-width: 600px !important;
+}
+
+::ng-deep #right-sidebar-nav >.side-nav li>a {
+  padding: 0 15px;
+}
+
+::ng-deep #right-sidebar-nav >.side-nav li>a:hover{
+  text-decoration: none;
+  background-color: rgba(0,0,0,0);
+}
+
+::ng-deep #right-sidebar-nav >.side-nav li>a>[class^=mdi-]{
+  margin: 0px;
+}
+
+::ng-deep .chat-close-collapse{
+  text-decoration: none;
+  font-size: 24px !important;
+  color: #c2c2c2;
+  z-index: 9999;
+  display: inline-block;
+  cursor: pointer;
+  -ms-transform: rotate(0deg);
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -webkit-transition: .5s;
+  -moz-transition: .5s;
+  -ms-transition: .5s;
+  -o-transition: .5s;
+  transition: .5s;
+}
+
+::ng-deep .chat-close-collapse:hover{
+  -ms-transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+::ng-deep .plan-hdr{
+  background: palegoldenrod !important;
+  color: #454545;
+  font-size: 10px;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding: 33px 0 16px 25px;
+  border-bottom: 1px solid #f6f6f6;
+}
+
+::ng-deep .plan-details{
+  min-height: 118px;
+  max-height: calc(100vh - 165px);
+  box-sizing: border-box;
+  font-style: normal;
+  overflow: auto;
+}
+
+::ng-deep .plan-hdr> span{
+  padding-right: 80px;
+}
+
+::ng-deep .plan-details p > span {
+  width: 103px;
+  margin-right: 20px;
+  display: inline-block;
+  margin-left: 0 !important;
+}
+
+::ng-deep .plan-details p > i {
+  width: 35%;
+  display: inline-block;
+
+}
+::ng-deep .plan-details p > u {
+  max-width: 335px;
+ text-decoration: none;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+::ng-deep .plan-details p {
+  margin-right: 0;
+  padding-left: 25px;
+  color: #838c8d;
+  font-size: 13px;
+  border-bottom: 1px solid #f6f6f6;
+}
+
+::ng-deep .plan-details .icon-prefix-fix{
+  font-size:.8rem!important
+}
+
+::ng-deep .plan-btn{
+  cursor: pointer;
+  padding: 0px 30px;
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 4px;
+  border: 1px solid #4679BD;;
+  color:  #4679BD;;
+  background: none;
+  text-transform: uppercase;
+}
+
+::ng-deep .plan-btn:hover {
+  background: #4679BD;;
+  color: #fff;
+}
+
+::ng-deep .plan-btn:focus{
+  color: #4679BD;
+  background-color: transparent !important;
+}

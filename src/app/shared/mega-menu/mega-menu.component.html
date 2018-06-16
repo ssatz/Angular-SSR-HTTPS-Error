@@ -1,0 +1,19 @@
+<div class="menu-wrapper">
+    <ul class="nav">
+        <li *ngFor="let menuItem of menu" (mouseover)="mouseHover($event)">
+            <a href="#">{{menuItem.name}}</a>
+            <div class="z-depth-2">
+                <div class="nav-column" *ngFor="let children of menuItem.children">
+                    <a href="{{children.slug}}/" class="cool-link" (click)="categoryNav($event,children.slug)">
+                        <h3>{{children.name}}</h3>
+                    </a>
+                    <ul>
+                        <li *ngFor="let child of children.mega_menu">
+                            <a href="{{children.slug}}/{{child.q}}/" (click)="navigate($event,children,child)">{{child.name}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

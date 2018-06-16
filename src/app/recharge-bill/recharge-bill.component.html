@@ -1,0 +1,292 @@
+<section id="content" class="index-banner">
+    <div class="divider"></div>
+    <div class="row padding-5">
+        <div class="col s12 m6 l4">
+            <div class="row">
+                <div class="col s12">
+                    <ul class="tabs tab-demo-active z-depth-1 tab-recharge" materialize="tabs">
+                        <li class="tab col s3">
+                            <a class="white-text waves-effect waves-light active icon-fix" href="#mobile">
+                                <i class="fa fa-mobile medium" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li class="tab col s3">
+                            <a class="white-text waves-effect waves-light icon-fix" href="#datacard">
+                                <i class="fa fa-wifi medium" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li class="tab col s3">
+                            <a class="white-text waves-effect waves-light icon-fix" href="#dth">
+                                <i class="fa fa-television medium" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li class="tab col s3">
+                            <a class="white-text waves-effect waves-light icon-fix" href="#landline">
+                                <i class="fa fa-phone medium" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div id="mobile" class="col s12">
+                    <div class="col s12 center white card card-content-recharge">
+                        <p class="orange-text">Mobile Recharge/Bill Pay</p>
+                        <div class="divider"></div>
+                        <form class="col s12" #mobileFormEl [formGroup]="rechargeForm" novalidate (ngSubmit)="rechargeFormSubmit(rechargeForm)">
+                            <div class="row">
+                                <div class="input-field">
+                                    <div class="col s6">
+                                        <input name="simType" type="radio" id="mobPrepaid" formControlName="simType" (change)="handleChange(mobileSimType.PREPAID)"
+                                            [value]="mobileSimType.PREPAID" />
+                                        <label for="mobPrepaid">Prepaid</label>
+                                    </div>
+                                    <div class="col s6">
+                                        <input name="simType" type="radio" id="mobPostpaid" formControlName="simType" (change)="handleChange(mobileSimType.POSTPAID)"
+                                            [value]="mobileSimType.POSTPAID" />
+                                        <label for="mobPostpaid">Postpaid</label>
+                                    </div>
+                                    <control-messages [control]="rechargeForm.get('simType')"></control-messages>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <i class="material-icons prefix icon-prefix-fix">phonelink_ring</i>
+                                    <input id="mobileNumber" type="number" formControlName="mobileNumber" #mobile class="validate icon_prefix3">
+                                    <label for="mobileNumber">Mobile Number</label>
+                                    <control-messages [control]="rechargeForm.get('mobileNumber')"></control-messages>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <i class="material-icons prefix icon-prefix-fix left-icon-prefix">settings_input_antenna</i>
+                                    <select id="selectOperator" (change)="getOperatorPlans($event)" materialize="material_select" #rechargeOperator formControlName="mobileOperator"
+                                        [materializeActions]="selectAction">
+                                        <option value="NAN" disabled>Select Network Operator</option>
+                                        <option *ngFor="let mobileOperator of mobileOperatorsCode;let i = index" [value]="mobileOperatorsCode[i].code">{{mobileOperatorsCode[i].operator}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s10">
+                                    <i class="fa-rupee fa prefix icon-prefix-fix"></i>
+                                    <input id="amount" name="amount" type="number" formControlName="amount" class="validate icon_prefix3">
+                                    <label for="amount">Amount</label>
+                                    <control-messages [control]="rechargeForm.get('amount')"></control-messages>
+                                </div>
+                                <div class="input-field col s2" *ngIf="rechargeForm.get('simType').value===mobileSimType.PREPAID">
+                                    <button class="btn-floating waves-effect waves-light tooltipped chat-collapse" [materializeActions]="sideNavAction" materialize="sideNav"
+                                        [materializeParams]="[{closeOnClick:true, draggable:true, edge: 'right',menuWidth: 450}]"
+                                        data-activates="chat-out" data-tooltip="Browse Plans">
+                                        <i class="mdi-action-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <button id="mobilebtn" class="ladda-button btn cyan waves-effect waves-light center" type="submit" name="action">Proceed
+                                        <i class="mdi-content-send right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div id="landline" class="col s12">
+                    <div class="col s12 center white card card-content-recharge">
+                        <p class="orange-text">Landline Bill Pay</p>
+                        <div class="divider"></div>
+                        <form class="col s12" #landLineFormEl [formGroup]="landLineBillForm" novalidate (ngSubmit)="landLineFormSubmit(landLineBillForm)">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <i class="material-icons prefix icon-prefix-fix left-icon-prefix">settings_input_antenna</i>
+                                    <select id="selectLandline" formControlName="landLineOperator" materialize="material_select" name="landLineOperators">
+                                        <option value="" disabled>Select Network Operator</option>
+                                        <option *ngFor="let landLine of landLineOperators;let i=index" [value]="landLineOperators[i].code">{{landLineOperators[i].operator}}</option>
+                                    </select>
+                                    <control-messages [control]="landLineBillForm.get('landLineOperator')"></control-messages>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <i class="material-icons prefix icon-prefix-fix left-icon-prefix">perm_identity</i>
+                                    <input id="customerAccNo" type="number" formControlName="landLineCustNo" class="validate icon_prefix3">
+                                    <label for="customerAccNo">Customer Account Number</label>
+                                    <control-messages [control]="landLineBillForm.get('landLineCustNo')"></control-messages>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <i class="fa fa-map-marker prefix icon-prefix-fix" aria-hidden="true"></i>
+                                    <input id="stdCode" type="text" formControlName="landLineStdCode" class="validate icon_prefix3">
+                                    <label for="stdCode">STD</label>
+                                    <control-messages [control]="landLineBillForm.get('landLineStdCode')"></control-messages>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <i class="fa fa-phone-square prefix icon-prefix-fix" aria-hidden="true"></i>
+                                    <input id="telephoneNo" type="number" formControlName="landLineTele" class="validate icon_prefix3">
+                                    <label for="telephoneNo">Telephone Number</label>
+                                    <control-messages [control]="landLineBillForm.get('landLineTele')"></control-messages>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <i class="fa-rupee fa prefix icon-prefix-fix"></i>
+                                    <input id="landLineAmount" type="number" formControlName="landLineAmount" class="validate icon_prefix3">
+                                    <label for="landLineAmount">Amount</label>
+                                    <control-messages [control]="landLineBillForm.get('landLineAmount')"></control-messages>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <button id="landlinebtn" class="ladda-button btn cyan waves-effect waves-light center" type="submit" name="action">Proceed
+                                        <i class="mdi-content-send right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <app-form-errors [errors]="globalFormError"></app-form-errors>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div id="datacard" class="col s12">
+                    <div class="col s12 center white card card-content-recharge">
+                        <p class="orange-text">Datacard Recharge/Bill Pay</p>
+                        <div class="divider"></div>
+                        <form class="col s12" #dataCardFormEl [formGroup]="dataCardForm" novalidate (ngSubmit)="dataCardFormSubmit(dataCardForm)">
+                            <div class="row">
+                                <p class="center-align">Prepaid Only</p>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <i class="material-icons prefix icon-prefix-fix left-icon-prefix">network_wifi</i>
+                                    <input id="dataMobileNumber" type="number" formControlName="dataCardNumber">
+                                    <label for="dataMobileNumber">Data Card Number</label>
+                                    <control-messages [control]="dataCardForm.get('dataCardNumber')"></control-messages>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <i class="material-icons prefix icon-prefix-fix left-icon-prefix">settings_input_antenna</i>
+                                    <select id="dataCardOperator" formControlName="dataCardOperator" materialize="material_select" name="dataCardOperators">
+                                        <option value="" disabled>Select Network Operator</option>
+                                        <option *ngFor="let dataCard of dataCardOperators;let i=index" [value]="dataCardOperators[i].code">{{dataCardOperators[i].operator}}</option>
+                                        <control-messages [control]="dataCardForm.get('dataCardOperator')"></control-messages>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <i class="fa-rupee fa prefix icon-prefix-fix"></i>
+                                    <input id="txtAmount" type="number" formControlName="dataCardAmount">
+                                    <label for="txtAmount">Amount</label>
+                                    <control-messages [control]="dataCardForm.get('dataCardAmount')"></control-messages>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <button id="datacardbtn" class="ladda-button btn cyan waves-effect waves-light center" type="submit" name="action">Proceed
+                                        <i class="mdi-content-send right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div id="dth" class="col s12">
+                    <div class="col s12 center white card card-content-recharge">
+                        <p class="orange-text">DTH Recharge</p>
+                        <div class="divider"></div>
+                        <form class="col s12" #dthFormEl [formGroup]="dthForm" novalidate (ngSubmit)="dthFormSubmit(dthForm)">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <i class="material-icons prefix icon-prefix-fix left-icon-prefix">settings_input_antenna</i>
+                                    <select id="dthOperator" formControlName="dthOperator" materialize="material_select">
+                                        <option value="" disabled>Select Network Operator</option>
+                                        <option *ngFor="let dataCard of dthOperators;let i=index" [value]="dthOperators[i].code">{{dthOperators[i].operator}}</option>
+                                        <control-messages [control]="dthForm.get('dthOperator')"></control-messages>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <i class="material-icons prefix icon-prefix-fix left-icon-prefix">sim_card</i>
+                                    <input id="dthMobileNumber" type="number" formControlName="dthNumber">
+                                    <label for="dthMobileNumber">Smart Card Number</label>
+                                    <control-messages [control]="dthForm.get('dthNumber')"></control-messages>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <i class="fa-rupee fa prefix icon-prefix-fix"></i>
+                                    <input id="dthAmount" type="number" formControlName="dthAmount">
+                                    <label for="dthAmount">Amount</label>
+                                    <control-messages [control]="dthForm.get('dthAmount')"></control-messages>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <button id="dthbtn" class="ladda-button btn cyan waves-effect waves-light center" type="submit" name="action">Proceed
+                                        <i class="mdi-content-send right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m8 l8 hide-on-small-only">
+            <div class="row">
+                <div class="col s12">
+                    <div class="padding-top">
+                        <div class="recharge-heading">
+                            <i class="material-icons large">flash_on</i>
+                        </div>
+                        <div class="recharge-heading">
+                            <strong>Free Recharge </strong>
+                        </div>
+                        <div class="recharge-heading">On All Your Purchases via Paisaclub.com</div>
+                        <div class="recharge-heading store-logo">
+                            <a href="javascript:void(0)">
+                                <img class="image-container store" src="assets/store-logo/flipkart.png">
+                            </a>
+                            <a href="javascript:void(0)">
+                                <img class="image-container store" src="assets/store-logo/amazon.png">
+                            </a>
+                            <a href="javascript:void(0)">
+                                <img class="image-container store" src="assets/store-logo/bookmyshow.png">
+                            </a>
+                            <a href="javascript:void(0)">
+                                <img class="image-container store" src="assets/store-logo/myntra.png">
+                            </a>
+                            <a href="javascript:void(0)">
+                                <img class="image-container store" src="assets/store-logo/firstcry.png">
+                            </a>
+                            <a href="javascript:void(0)">
+                                <img class="image-container store" src="assets/store-logo/airtel.png">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<right-sidebar [offers]="dataPlans" (offerSelected)="offerSelected($event) "></right-sidebar>
+<div class="row">
+    <p class="heading">Operators We Support</p>
+    <div class="divider"></div>
+    <div class="col s12 m8 l8 offset-m2 offset-l2">
+        <div class="row">
+            <div class="col s3 m2 l1" *ngFor="let operator of operatorList">
+                <a href="javascript:void(0)">
+                    <img width="40px" height="40px" [attr.data-tooltip]="operator.name" materialize="tooltip" data-position="bottom" [src]="operator.logoURL">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<modal-cmp [content]="modalContent"></modal-cmp>

@@ -1,0 +1,22 @@
+{
+    "short_name": "Paisaclub",
+    "name": "Recharge & Much More!",
+    "icons": [
+        {
+            "src": "assets/favicon/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "assets/favicon/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#607d8b",
+    "background_color": "#e5e5e5",
+    "start_url": "./?launcher=true&utm_source=homescreen",
+    "display": "standalone",
+    "orientation":"portrait",
+    "gcm_sender_id": "694620571551"
+}

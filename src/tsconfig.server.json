@@ -1,0 +1,18 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../dist-server/",
+    "baseUrl": "./",
+    "types": ["node"],
+    "typeRoots": ["../node_modules/@types"]
+  },
+  "exclude": [
+    "test.ts",
+    "**/*.spec.ts",
+    "node_modules"
+  ],
+  "angularCompilerOptions": {
+    "preserveWhitespaces": false,
+    "entryModule": "app/app.server.module#AppServerModule"
+  }
+}

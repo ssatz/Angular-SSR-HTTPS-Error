@@ -1,0 +1,238 @@
+<!--
+  ~ /* Copyright (C) Paisaclub.com - All Rights Reserved
+  ~  * Unauthorized copying of this file, via any medium is strictly prohibited
+  ~  * Proprietary and confidential
+  ~  * Written by Sathish Kumar(satz) <sathish.thi@gmail.com>
+  ~  */
+  -->
+
+<div id="chart-dashboard">
+    <div class="row">
+        <div class="col s12 m4 l3">
+            <div class="row">
+                <div class="col s12 m12 l12">
+                    <div class="card">
+                        <div class="card-move-up waves-effect waves-block waves-light">
+                            <div class="move-up cyan darken-1">
+                                <div>
+                                    <span class="chart-title white-text"><i class="mdi-action-dashboard"></i> AT A GLANCE</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div class="col s12 m3 l12">
+                                <div id="doughnut-chart-wrapper">
+                                    <div class="doughnut-chart-header">Total : {{(earnings | async)?.EarningsApproved | currency:'INR':true:'1.2-2'}}
+                                    </div>
+                                    <canvas #doughnutChart class="dashboard-doughnut"></canvas>
+                                </div>
+                            </div>
+                            <div class="col s12 m2 l12">
+                                <ul class="doughnut-chart-legend">
+                                    <li class="mobile ultra-small">
+                                        <div class="row li-chart-legend">
+                                            <div class="col s7 l7 m7">
+                                                <span class="legend-color"></span>Paid
+                                            </div>
+                                            <div class="col s4 l4 m4">
+                                                <span class="right">{{(earnings | async)?.Paid | currency:'INR':true:'1.2-2'}}</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="kitchen ultra-small">
+                                        <div class="row li-chart-legend">
+                                            <div class="col s7 l7 m7">
+                                                <span class="legend-color"></span>Payment Requested
+                                            </div>
+                                            <div class="col s4 l4 m4">
+                                                <span class="right">{{(earnings | async)?.PaymentRequested | currency:'INR':true:'1.2-2'}}</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="home ultra-small">
+                                        <div class="row li-chart-legend">
+                                            <div class="col s7 l7 m7">
+                                                <span class="legend-color"></span>Balance Payable
+                                            </div>
+                                            <div class="col s4 l4 m4">
+                                                <span class="right">{{(earnings | async)?.BalancePayable | currency:'INR':true:'1.2-2'}}</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-action card-action-click center" style="clear: both">
+                            <a  [routerLink]="['/myaccount/payment']">Request Payment</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 m12 l12">
+                    <div id="card-stats">
+                        <div class="row">
+                            <div class="col s12 m12 l12 col-padding-0">
+                                <div class="card">
+                                    <div class="card-move-up waves-effect waves-block waves-light">
+                                        <div class="move-up purple darken-1">
+                                            <div>
+                                                <span class="chart-title white-text"><i class="mdi-action-assignment-late"></i> PENDING APPROVAL</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-action center card-pending-approval">
+                                        <h4 class="card-stats-number purple-text">{{(earnings | async)?.EarningPendingForApproval | currency:'INR':true:'1.2-2'}}</h4>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col s12 m4 l3">
+            <div class="row">
+                <div class="col s12 m12 l12">
+                    <div id="card-stats">
+                        <div class="row">
+                            <div class="col s12 m12 l12 col-padding-0">
+                                <div class="card">
+                                    <div class="card-move-up waves-effect waves-block waves-light">
+                                        <div class="move-up light-green">
+                                            <div>
+                                                <span class="chart-title white-text"><i class="mdi-social-people"></i> REFERRALS</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h5 class="card-stats-number light-green-text">{{(earnings | async)?.Referrals}}</h5>
+                                    </div>
+                                    <div class="card-action card-action-click center">
+                                        <a [routerLink]="['/myaccount/referral']" class="">REFER &amp; EARN MORE</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 m12 l12">
+                    <div id="card-stats">
+                        <div class="row">
+                            <div class="col s12 m12 l12 col-padding-0">
+                                <div class="card card-notification">
+                                    <div class="card-move-up waves-effect waves-block waves-light">
+                                        <div class="move-up pink">
+                                            <div>
+                                                <span class="chart-title white-text"><i class="mdi-action-done"></i> Action Items</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ng-template *ngIf="(actionItems | async)?.length > 0;then ActionsAvailable else NoActions"> </ng-template>
+                                    <ng-template #ActionsAvailable>
+                                    <div class="card-action" *ngFor="let item of actionItems | async">
+                                        <div class="row">
+                                            <div class="col s10 m10 l0">
+                                                <span>{{item?.Message}}</span>
+                                            </div>
+                                            <div class="col s2 m2 l2">
+                                                <a [routerLink]="[item?.RedirectURL]"><i class="mdi-content-send"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </ng-template>
+                                    <ng-template #NoActions>
+                                        <div class="card-action">
+                                            <div class="row">
+                                                <div class="col s12 center padding-20">
+                                                    <span class="grey-text lighten-1">No Action Needed <i class="fa fa-smile-o"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m4 l6">
+            <div class="row">
+                <div class="col s12 m12 l12">
+                    <div class="card">
+                        <div class="card-move-up waves-effect waves-block waves-light">
+                            <div class="move-up amber accent-4">
+                                <div>
+                                    <span class="chart-title white-text"><i class="mdi-action-add-shopping-cart"></i> RECENT TRANSACTIONS</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div [ngClass]="(totalNumber>0)? 'card-content table-transactions':'card-content table-transactions-no-pager'">
+                            <ng-template *ngIf="(transactions | async)?.length > 0;then TxnAvailable else Notxn"> </ng-template>
+                            <ng-template #TxnAvailable>
+                            <div id="responsive-table">
+                                <div class="row">
+                                    <div class="col s12 m12 l12">
+                                        <table class="responsive-table striped">
+                                            <thead>
+                                            <tr>
+                                                <th data-field="id">Transaction ID</th>
+                                                <th data-field="name">Store</th>
+                                                <th data-field="price">Purchase date</th>
+                                                <th data-field="total">Cashback</th>
+                                                <th data-field="status">Status</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr *ngFor="let transaction of transactions | async">
+                                                <td>{{transaction?.TransactionId}}</td>
+                                                <td>{{transaction?.Merchant}}</td>
+                                                <td>{{transaction?.PurchaseDate}}</td>
+                                                <td>{{transaction?.CashbackAmount | currency:'INR':true:'1.2-2'}}</td>
+                                                <td>{{transaction?.CashbackStatus}}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            </ng-template>
+                            <ng-template #Notxn>
+                                <div class="row">
+                                    <div class="col s12 center padding-20">
+                                        <span class="grey-text lighten-1">It's lonely here <i class="fa fa-meh-o"></i></span>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </div>
+                        <div class="divider"></div>
+                        <!-- pager -->
+                        <div>
+                            <ul *ngIf="pager.pages && pager.pages.length" class="pagination center">
+                                <li class="waves-effect" [ngClass]="{disabled:pager.currentPage == 1}">
+                                    <a class="tooltipped" materialize="tooltip" data-position="bottom" data-tooltip="First" (click)="setPage(1)"><i class="mdi-av-skip-previous"></i></a>
+                                </li>
+                                <li class="waves-effect" [ngClass]="{disabled:pager.currentPage == 1}">
+                                    <a class="tooltipped" materialize="tooltip" data-position="bottom" data-tooltip="previous" (click)="setPage(pager.currentPage - 1)"><i class="mdi-hardware-keyboard-arrow-left"></i></a>
+                                </li>
+                                <li class="waves-effect" *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage == page}">
+                                    <a (click)="setPage(page)">{{page}}</a>
+                                </li>
+                                <li class="waves-effect" [ngClass]="{disabled:pager.currentPage == pager.totalPages}">
+                                    <a class="tooltipped" materialize="tooltip" data-position="bottom" data-tooltip="Next" (click)="setPage(pager.currentPage + 1)"><i class="mdi-hardware-keyboard-arrow-right"></i></a>
+                                </li>
+                                <li class="waves-effect" [ngClass]="{disabled:pager.currentPage == pager.totalPages}">
+                                    <a class="tooltipped" materialize="tooltip" data-position="bottom" data-tooltip="Last" (click)="setPage(pager.totalPages)"><i class="mdi-av-skip-next"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

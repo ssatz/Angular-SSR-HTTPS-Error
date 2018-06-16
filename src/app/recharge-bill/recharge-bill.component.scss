@@ -1,0 +1,198 @@
+/*!
+ *  Copyright (C) Paisaclub.com - All Rights Reserved
+ *  * Unauthorized copying of this file, via any medium is strictly prohibited
+ *  * Proprietary and confidential
+ *  * Written by Sathish Kumar(satz) <sathish.thi@gmail.com>
+ *
+ */
+
+/deep/ .tab-recharge
+{
+  min-height: 84px !important;
+  width: 100% !important;
+  background: rgba(213,202,169,0.5);
+  border-radius: 3px;
+  top: 2px;
+}
+
+/deep/ .recharge-type
+{
+  padding: 5px !important;
+  border-radius: 5px !important;
+  color: white !important;
+}
+
+/deep/ .recharge-plan-price
+{
+  font-weight: bold !important;
+  font-size: 15px !important;
+}
+
+/deep/ .btn-recharge-small
+{
+  height:22px !important;
+  width:75px !important;
+  font-size:12px !important;
+  padding:0px !important;
+  line-height:22px !important;
+}
+
+/deep/ .margin-recharge-card
+{
+  background-color: rgba(255,255,255,0.1);
+  border-radius: 20px;
+}
+
+/deep/ .card-content-recharge
+{
+  margin: 0 !important;
+  min-height: 440px !important;
+}
+
+/deep/ .card-content-recharge .input-field
+{
+  margin-top:0px !important;
+}
+
+/deep/ .tab-recharge .indicator
+{
+  height: 5px !important;
+  background-color: #00d9bb !important;
+}
+
+/deep/ .tab-recharge>li>a>img{
+  margin-top: 15px !important;
+}
+
+/deep/ .card-recharge
+{
+  min-height: 522px !important;
+}
+
+/deep/ .index-banner {
+  background: url(../../images/app-images/2.jpg)  repeat-x 0 0;
+  background-size: 100%;
+  position: relative;
+  margin-top: -1px;
+}
+
+/deep/ .icon-fix{
+  padding-top: 22px !important;
+  height: initial !important;
+}
+
+/deep/ .icon-fix>i.medium{
+  font-size:2.7rem;
+}
+/deep/ .icon-prefix-fix {
+  margin-top: 13px !important;
+  font-size: 1.2rem !important;
+}
+
+/deep/ .left-icon-prefix{
+  left:8px;
+}
+/deep/ .input-field div.error {
+  position: absolute !important;
+  top: 3.5rem !important;
+  left: 3.8rem !important;
+  font-size: .8rem !important;
+  color: #ff600a !important;
+  -webkit-transform: translateY(0);
+  -ms-transform: translateY(0);
+  -o-transform: translateY(0);
+  transform: translateY(0);
+}
+
+/deep/ .divider{
+  height: 1px;
+  overflow: hidden;
+  background-color: #e0e0e0;
+  margin-bottom:18px;
+}
+
+/deep/ .ladda-button {
+  padding: 0px 20px!important;
+}
+
+/deep/ .heading {
+  line-height: 40px;
+  padding: 45px 0 5px 0;
+  color: #333;
+  font-size: 15px;
+  display: block;
+  text-align: center;
+  font-weight: 600;
+  text-transform: uppercase;
+  position: relative;
+}
+
+/deep/ .operators-logo span {
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+  padding-bottom: 35px;
+}
+
+/deep/ .operators-logo a {
+  color: #838c8d;
+  font-size: 13px;
+  padding: 0 34px;
+  margin-bottom: 7px;
+  height: 70px;
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+/deep/ .wrap {
+  width: 980px;
+  margin: auto;
+}
+
+/deep/ .operators-logo img{
+    background-size: 30px 30px !important;
+    width: 34px;
+    height: 34px;
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+  opacity: 0.7;
+  transition: .2s;
+  transform: scale(1);
+}
+/deep/ .operators-logo img:hover{
+  -webkit-filter: grayscale(0%);
+  filter: grayscale(0%);
+  opacity: 1;
+  transform: scale(1.50);
+}
+/deep/ .recharge-heading{
+  line-height: 40px;
+  color: #FFFFFF;
+  font-size: 20px;
+  display: block;
+  text-align: center;
+  font-weight: 600;
+  text-transform: uppercase;
+  position: relative;
+}
+
+/deep/ .padding-top{
+  padding-top: 130px;
+}
+
+/deep/ .store{
+  width: 100px;
+  height: 45px;
+}
+
+/deep/ .store-logo{
+  background-color: hsla(0,0%,95%,1.1);
+  border-radius: 100px;
+  max-width: 83%;
+  margin-left: 62px;
+}
+
+/deep/ .store-logo img {
+  margin-top: 10px;
+}
+

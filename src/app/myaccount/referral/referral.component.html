@@ -1,0 +1,174 @@
+<!--
+  ~ /* Copyright (C) Paisaclub.com - All Rights Reserved
+  ~  * Unauthorized copying of this file, via any medium is strictly prohibited
+  ~  * Proprietary and confidential
+  ~  * Written by Sathish Kumar(satz) <sathish.thi@gmail.com>
+  ~  */
+  -->
+
+<div class="wrapper">
+    <div class="row">
+        <div class="col s12 m6 l4">
+            <div class="card referral-card">
+                <div class="card-move-up waves-effect waves-block waves-light">
+                    <div class="move-up pink darken-1">
+                        <div>
+                            <h5 class="chart-title white-text"><i class="mdi-action-help"></i> FAQ</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content user-profile-content">
+                    <ul class="collection z-depth-1">
+                        <li class="collection-item">
+                            <div class="row">
+                                <div class="col s12 grey-text darken-1"><i class="mdi-toggle-check-box"></i> Why Should I Refer?</div>
+                                <div class="col s12 grey-text text-darken-4">Boost your earning by referral bonus.</div>
+                            </div>
+                        </li>
+                        <li class="collection-item">
+                            <div class="row">
+                                <div class="col s12 grey-text darken-1"><i class="mdi-toggle-check-box"></i> How much is the bonus?</div>
+                                <div class="col s12 grey-text text-darken-4">The amount will be calculated as 10% on your referral's cashback</div>
+                            </div>
+                        </li>
+                        <li class="collection-item">
+                            <div class="row">
+                                <div class="col s12 grey-text darken-1"><i class="mdi-toggle-check-box"></i> Referral bonus is one time or lifetime?</div>
+                                <div class="col s12 grey-text text-darken-4">Referral bonus is for lifetime.</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m6 l4">
+            <div class="card referral-card">
+                <div class="card-move-up waves-effect waves-block waves-light">
+                    <div class="move-up cyan darken-1">
+                        <div>
+                            <h5 class="chart-title white-text"><i class="mdi-social-group-add"></i> REFER</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content user-profile-content">
+                    <ul class="collection z-depth-1">
+                        <li class="collection-item">
+                            <div class="row">
+                                <div class="col s12 grey-text darken-1"><i class="mdi-communication-email"></i> Invite By E-Mail ID</div>
+                                <div class="col s12">
+                                    <div class="row">
+                                        <form novalidate #inviteForm="ngForm" (ngSubmit)="sendInvite(inviteForm)">
+                                        <div class="input-field col s10">
+                                            <input id="email" name="email" [email]="true" #email="ngModel" ngModel type="email" placeholder="Email" class="left validate icon_prefix3" required>
+                                            <div *ngIf="email.errors?.required && email.touched" class="error">
+                                               Email is required
+                                            </div>
+                                            <div *ngIf="email.errors?.email && email.touched && !email.errors?.required" class="error">
+                                               Provide a valid email
+                                            </div>
+                                        </div>
+                                        <div class="col s2">
+                                            <button class="btn btn-floating tooltipped" data-tooltip="Send Invite"><i class="mdi-content-send"></i></button>
+                                        </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                      <!--  <li class="collection-item">
+                            <div class="row">
+                                <div class="col s12 grey-text darken-1"><i class="mdi-communication-contacts"></i> Invite Email Contacts</div>
+                                <div class="col s12">
+                                    <div class="row">
+                                        <div class="col m2 l2 s4 center">
+                                            <button class="btn btn-floating waves-effect waves-light red darken-2 tooltipped" data-tooltip="Gmail"><i class="fa fa-google"></i></button>
+                                        </div>
+                                        <div class="col m2 l2 s4 center">
+                                            <button class="btn waves-effect waves-light deep-purple btn-floating tooltipped" data-tooltip="Yahoo"><i class="fa fa-yahoo" aria-hidden="true"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li> -->
+                        <li class="collection-item">
+                            <div class="row">
+                                <div class="col s12 grey-text darken-1"><i class="mdi-social-share"></i> Share on social network</div>
+                                <div class="col s12">
+                                    <div class="row">
+                                        <div class="col m2 l2 s3 center">
+                                            <button ceiboShare [facebook]="{url:url,text:referral}" class="btn btn-floating waves-effect waves-light light-blue darken-4 tooltipped" data-tooltip="Facebook"><i class="fa fa-facebook"></i></button>
+                                        </div>
+                                        <div class="col m2 l2 s3 center">
+                                            <button ceiboShare  [twitter]="{url:url, text:referral, hashtags:'paisaclub, cashback, referral'}" class="btn waves-effect waves-light blue btn-floating tooltipped" data-tooltip="Twitter"><i class="fa fa-twitter" aria-hidden="true"></i></button>
+                                        </div>
+                                        <div class="col m2 l2 s3 center">
+                                            <button ceiboShare  [googlePlus]="{url:url,text:referral}" class="btn waves-effect waves-light red darken-4 btn-floating tooltipped" data-tooltip="Google+"><i class="fa fa-google-plus" aria-hidden="true"></i></button>
+                                        </div>
+                                        <div class="col m2 l2 s3 center">
+                                            <button ceiboShare class="btn btn-floating waves-effect waves-light light-blue darken-4 tooltipped" [linkedIn]="{url:url,text:referral}"><i class="fa fa-linkedin"></i></button>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="collection-item">
+                            <div class="row">
+                                <div class="col s12 grey-text darken-1"><i class="mdi-communication-textsms"></i> Invite via SMS/Messenger</div>
+                                <div class="col s12">
+                                    <div class="row">
+                                        <div class="row" style="background-color: lightgoldenrodyellow">
+                                            <div class="col s12">
+                                                <p id="copy">Hi, I am using www.paisaclub.com and getting cashback for online
+                                                    purchases. Join using below link.
+                                                {{url | async}}</p>
+                                            </div>
+                                        </div>
+                                        <br/>
+                                        <div class="row">
+                                            <div class="col s12">
+                                                <button  class="btn waves-effect waves-light" data-clipboard-target="p#copy" id="btn-copy">Copy Text</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m6 l4">
+            <div class="card referral-card">
+                <div class="card-move-up waves-effect waves-block waves-light">
+                    <div class="move-up amber darken-1">
+                        <div>
+                            <h5 class="chart-title white-text"><i class="mdi-social-group"></i> REFERRAL LIST ({{(referrals| async).length}})</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content user-profile-content">
+                    <div id="responsive-table">
+                        <div class="row">
+                            <div class="col s12 m12 l12 table-overflow-y-500">
+                                <table class="responsive-table striped">
+                                    <thead>
+                                    <tr>
+                                        <th data-field="id">Name</th>
+                                        <th data-field="name">Email</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let referral of referrals | async">
+                                        <td>{{referral.name}}</td>
+                                        <td>{{referral.email}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

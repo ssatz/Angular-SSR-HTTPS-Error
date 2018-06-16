@@ -1,0 +1,296 @@
+<div id="profile-page" class="section">
+    <div class="row">
+        <div class="col s12 m4 l4" style="margin-top:0">
+            <div class="card profile-same-height">
+                <div class="card-move-up waves-effect waves-block waves-light">
+                    <div class="move-up cyan darken-1">
+                        <div class="row">
+                            <div class="col s10 m10 l10 left-align">
+                                <span class="white-text">
+                                    <i class="mdi-social-person"></i> PROFILE
+                                    <br/>
+                                    <sub>Keep your mobile number up-to-date for SMS notifications </sub>
+                                </span>
+                            </div>
+                            <div class="col s2 m2 l2 right-align">
+                                <button class="btn btn-floating activator white tooltipped" data-tooltip="Edit">
+                                    <i class="mdi-image-edit grey-text"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content user-profile-content">
+                    <ul class="collection z-depth-1">
+                        <li class="collection-item">
+                            <div class="row">
+                                <div class="col s12 grey-text darken-1">
+                                    <i class="mdi-social-person"></i> Name</div>
+                                <div class="col s12 grey-text text-darken-4">{{userProfile.user.name}}</div>
+                            </div>
+                        </li>
+                        <li class="collection-item">
+                            <div class="row">
+                                <div class="col s12 grey-text darken-1">
+                                    <i class="mdi-communication-email"></i> Email</div>
+                                <div class="col s12 grey-text text-darken-4">{{userProfile.user.email}}</div>
+                            </div>
+                        </li>
+                        <li class="collection-item">
+                            <div class="row">
+                                <div class="col s12 grey-text darken-1">
+                                    <i class="mdi-hardware-phone-iphone"></i> Mobile</div>
+                                <div class="col s12 grey-text text-darken-4">
+                                    {{userProfile.user.mobile}}
+                                    <span style="padding-left: 20px;" *ngIf="userProfile.user.mobile!=null">
+                                        <button id="sms-verify-btn" (click)="openSMSModal($event)" *ngIf="!userProfile.user.MobileVerified; else verified" class="btn btn-small waves-effect waves-light pulse red"
+                                            type="button">Verify</button>
+                                        <ng-template #verified>
+                                            <i class="material-icons mdi-action-verified-user teal-text"></i>
+                                        </ng-template>
+                                    </span>
+                                    <sub class="red-text" *ngIf="userProfile.user.mobile==null">
+                                        <i class="mdi-action-info"></i>Add & verify mobile to get
+                                        <i class="mdi-rupee-symbol">{{userProfile.user.joining_bonus}}</i>
+                                    </sub>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="collection-item">
+                            <div class="row">
+                                <div class="col s12 grey-text darken-1">
+                                    <i class="mdi-social-cake"></i> Birth date</div>
+                                <div class="col s12 grey-text text-darken-4">{{userProfile.user.DOB}}</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-reveal" id="scroll-bar-card-1">
+                    <span class="card-title grey-text text-darken-4">Edit
+                        <i class="mdi-navigation-close right" id="user-close"></i>
+                    </span>
+                    <div class="divider"></div>
+                    <form class="col s12" [formGroup]="userDetailsForm" novalidate (ngSubmit)="updateUserDetails(userDetailsForm.value,userDetailsForm.valid)">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="mdi-social-person prefix"></i>
+                                <input placeholder="Name" type="text" [(ngModel)]="userProfile.user.name" id="name" formControlName="name" class="validate">
+                                <control-messages [control]="userDetailsForm.get('name')"></control-messages>
+                            </div>
+                            <div class="input-field col s12">
+                                <i class="mdi-hardware-phone-iphone prefix"></i>
+                                <input placeholder="Mobile Number" type="text" [(ngModel)]="userProfile.user.mobile" id="mobile" formControlName="mobile"
+                                    class="validate">
+                                <control-messages [control]="userDetailsForm.get('mobile')"></control-messages>
+                            </div>
+                            <div class="input-field col s12">
+                                <i class="mdi-social-cake prefix"></i>
+                                <input placeholder="Birth Date" type="text" [(ngModel)]="userProfile.user.DOB" class="datepicker" id="DOB" formControlName="DOB"
+                                    materialize="pickadate" [materializeParams]="[{selectMonths: true, selectYears: 100,container: 'body',format: 'dd-mm-yyyy'}]">
+                                <control-messages [control]="userDetailsForm.get('DOB')"></control-messages>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12 right-align">
+                                <button type="submit" class="btn waves-effect waves-light">Save</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m4 l4" style="margin-top:0">
+            <div class="card profile-same-height">
+                <div class="card-move-up waves-effect waves-block waves-light">
+                    <div class="move-up pink darken-1">
+                        <div class="row">
+                            <div class="col s10 m10 l10 left-align">
+                                <span class="white-text">
+                                    <i class="mdi-action-payment"></i> PAYMENT DETAILS
+                                    <br/>
+                                    <sub>Add account details to receive your cashback</sub>
+                                </span>
+                                <span></span>
+                            </div>
+                            <div class="col s2 m2 l2 right-align">
+                                <button class="btn btn-floating white activator tooltipped" data-tooltip="Edit">
+                                    <i class="mdi-image-edit grey-text"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content user-profile-content">
+                    <ul class="collection z-depth-1">
+                        <li class="collection-item">
+                            <div class="row">
+                                <div class="col s12 grey-text darken-1">
+                                    <i class="mdi-action-perm-identity"></i> Account Holder Name</div>
+                                <div class="col s12 grey-text text-darken-4">{{userProfile.bank.AccountHolderName}}</div>
+                            </div>
+                        </li>
+                        <li class="collection-item">
+                            <div class="row">
+                                <div class="col s12 grey-text darken-1">
+                                    <i class="mdi-action-account-box"></i> Account Number</div>
+                                <div class="col s12 grey-text text-darken-4">{{userProfile.bank.AccountNumber}}</div>
+                            </div>
+                        </li>
+                        <li class="collection-item">
+                            <div class="row">
+                                <div class="col s12 grey-text darken-1">
+                                    <i class="mdi-action-account-balance"></i> Bank Name</div>
+                                <div class="col s12 grey-text text-darken-4">{{userProfile.bank.BankName}}</div>
+                            </div>
+                        </li>
+                        <li class="collection-item">
+                            <div class="row">
+                                <div class="col s12 grey-text darken-1">
+                                    <i class="mdi-maps-place"></i> Branch</div>
+                                <div class="col s12 grey-text text-darken-4">{{userProfile.bank.Branch}}</div>
+                            </div>
+                        </li>
+                        <li class="collection-item">
+                            <div class="row">
+                                <div class="col s12 grey-text darken-1">
+                                    <i class="mdi-action-search"></i> IFSC Code</div>
+                                <div class="col s12 grey-text text-darken-4">{{userProfile.bank.IFSC_Code}}</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-reveal" id="scroll-bar-card-2">
+                    <span class="card-title grey-text text-darken-4">Edit
+                        <i class="mdi-navigation-close right" id="bank-close"></i>
+                    </span>
+                    <div class="divider"></div>
+                    <form class="col s12" [formGroup]="bankForm" novalidate (ngSubmit)="cuBankDetails(bankForm.value,bankForm.valid)">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="mdi-action-perm-identity prefix"></i>
+                                <input placeholder="Account Holder Name" [(ngModel)]="userProfile.bank.AccountHolderName" type="text" id="bank-user-name"
+                                    formControlName="AccountHolderName" class="validate icon_prefix3">
+                                <control-messages [control]="bankForm.get('AccountHolderName')"></control-messages>
+                            </div>
+                            <div class="form-group" formGroupName="AccountNumberGroup">
+                                <div class="input-field col s12">
+                                    <i class="mdi-action-account-box prefix"></i>
+                                    <input placeholder="Account Number" [(ngModel)]="userProfile.bank.AccountNumber" type="password" id="account-number" formControlName="AccountNumber"
+                                        class="validate icon_prefix3">
+                                    <control-messages [control]="bankForm.get('AccountNumberGroup').get('AccountNumber')"></control-messages>
+                                </div>
+                                <div class="input-field col s12">
+                                    <i class="mdi-action-account-box prefix"></i>
+                                    <input placeholder="Confirm Account Number" id="cf-account-number" type="text" formControlName="ConfirmAccountNumber" class="validate icon_prefix3">
+                                    <control-messages [control]="bankForm.get('AccountNumberGroup').get('ConfirmAccountNumber')"></control-messages>
+                                    <control-messages [control]="bankForm.get('AccountNumberGroup')"></control-messages>
+                                </div>
+                            </div>
+                            <div class="input-field col s12">
+                                <i class="mdi-action-search prefix"></i>
+                                <input placeholder="IFSC Code" [(ngModel)]="userProfile.bank.IFSC_Code" type="text" name="IFSC_Code" formControlName="IFSC_Code"
+                                    class="validate icon_prefix3">
+                                <control-messages [control]="bankForm.get('IFSC_Code')"></control-messages>
+                            </div>
+                            <div class="input-field col s12">
+                                <i class="mdi-action-account-balance prefix"></i>
+                                <select materialize="material_select" (ngModelChange)="selectBank($event)" [ngModel]="userProfile.bank.BankId" name="BankName"
+                                    [materializeSelectOptions]="BankName" formControlName="BankName">
+                                    <option value="" disabled>Select Bank</option>
+                                    <option *ngFor="let bankDetails of userProfile.bankNames" [value]="bankDetails.id">{{bankDetails.bankname}}</option>
+                                </select>
+                                <control-messages [control]="bankForm.get('BankName')"></control-messages>
+                            </div>
+                            <div class="input-field col s12">
+                                <i class="mdi-maps-place prefix"></i>
+                                <input placeholder="Branch" type="text" [(ngModel)]="userProfile.bank.Branch" formControlName="Branch" id="branch" class="validate icon_prefix3">
+                                <control-messages [control]="bankForm.get('Branch')"></control-messages>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12 right-align">
+                                <button type="submit" class="ladda-button waves-effect waves-light btn btn-paisaclub-loader">Save</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m4 l4" style="margin-top:0">
+            <div class="card profile-same-height">
+                <div class="card-move-up waves-effect waves-block waves-light">
+                    <div class="move-up amber darken-1">
+                        <div class="row">
+                            <div class="col s10 m10 l10 left-align">
+                                <span class="white-text">
+                                    <i class="mdi-action-verified-user"></i> CHANGE PASSWORD
+                                    <br/>
+                                    <sub>Always use more secure password</sub>
+                                </span>
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content user-profile-content">
+                    <app-form-errors [errors]="formErrors()"></app-form-errors>
+                    <form class="col s12" [formGroup]="passwordForm" novalidate (ngSubmit)="submitPasswordChange(passwordForm.value,passwordForm.valid,$event)">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="mdi-action-lock-outline prefix"></i>
+                                <input placeholder="Current Password" formControlName="current_password" type="password" id="current-password" class="validate icon_prefix3"
+                                />
+                                <control-messages [control]="passwordForm.get('current_password')"></control-messages>
+                            </div>
+                            <div class="form-group" formGroupName="password_group">
+                                <div class="input-field col s12">
+                                    <i class="mdi-action-lock prefix"></i>
+                                    <input placeholder="Type New Password" formControlName="password" type="password" id="new-password" class="validate icon_prefix3"
+                                    />
+                                    <control-messages [control]="passwordForm.get('password_group').get('password')"></control-messages>
+                                </div>
+                                <div class="input-field col s12">
+                                    <i class="mdi-toggle-check-box prefix"></i>
+                                    <input placeholder="Confirm New Password" formControlName="confirm_password" id="confirm_password" type="password" class="validate icon_prefix3"
+                                    />
+                                    <control-messages [control]="passwordForm.get('password_group').get('confirm_password')"></control-messages>
+                                    <control-messages [control]="passwordForm.get('password_group')"></control-messages>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12 right-align">
+                                <button type="submit" class="waves-effect waves-light btn">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="sms-modal" class="modal" materialize="modal" [materializeParams]="[{dismissible: false,opacity: .5}]" [materializeActions]="smsModal">
+    <form novalidate #smsForm="ngForm" (ngSubmit)="verifyMobile(smsForm)">
+        <div class="modal-content">
+            <div class="row">
+                <span class="center">Verify Your Mobile</span>
+            </div>
+            <div class="input-field col s12">
+                <i class="mdi-communication-phone prefix"></i>
+                <input name="sms_code" #sms_code="ngModel" placeholder="Four Digit Verification Code" pattern="[1-9][0-9]{3,3}" type="number"
+                    ngModel class="validate icon_prefix3" required/>
+                <div *ngIf="sms_code.errors?.required && sms_code.touched" class="error">
+                    Verification Code is required
+                </div>
+                <div *ngIf="sms_code.errors?.pattern && sms_code.touched" class="error">
+                    Enter Four Digit Number
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" autofocus [disabled]="smsForm.invalid" class="waves-effect modal-action btn right">Verify</button>
+            <button id="resend-code" (click)="resendCode($event)" class="waves-effect modal-action btn left red">Resend Code</button>
+        </div>
+    </form>
+</div>

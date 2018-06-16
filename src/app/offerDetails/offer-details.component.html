@@ -1,0 +1,225 @@
+<div class="row">
+    <section id="content">
+        <div class="row">
+            <div class="col s12 m4 l3">
+                <div id="profile-card" class="card card-height">
+                    <div class="card-content user-profile-content">
+                        <ul class="collection z-depth-1">
+                            <li class="collection-item center">
+                                <h5>
+                                    <img src="{{offerDetailsViewModel.offerInfo.LogoURL}}" alt="materialize logo" class="offer-image-responsive">
+                                </h5>
+                            </li>
+                            <li class="collection-item">
+                                <div class="row">
+                                    <div class="col s6 m6 l6" style="border-right:1px solid lightgrey">
+                                        <div class="row">
+                                            <span class="grey-text">Cashback Upto</span>
+                                        </div>
+                                        <div class="row center">
+                                            <span class="cyan-text rate-text">{{offerDetailsViewModel.offerInfo.pc_Payout}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col s6 m6 l6">
+                                        <div class="row">
+                                            <span class="grey-text">Deals/Coupons</span>
+                                        </div>
+                                        <div class="row center">
+                                            <span class="pink-text rate-text">{{offerDetailsViewModel.couponDetails.length}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="collection-item">
+                                <div class="row">
+                                    <div class="col s12 center">
+                                        <a target="_blank" href="/shop/{{offerDetailsViewModel.offerInfo.SEOName}}" class="btn waves-effect waves-light orange darken-1 btn-share-social font-size-12">
+                                            Open {{offerDetailsViewModel.offerInfo.name}}
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="collection-item">
+                                <div class="row">
+                                    <div class="col s12 center">
+                                        <button (click)="fbshare($event)" class="btn waves-effect waves-light light-blue darken-4 btn-share-social">Share on Facebook</button>
+                                        <button ceiboShare [twitter]="{url:url, text:referral, hashtags:'paisaclub, cashback, referral'}" class="btn waves-effect waves-light blue btn-share-social">Share on Twitter</button>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m8 l9">
+                <div class="card slider-card">
+                    <div class="card-content">
+                        <div class="slider" materialize="slider" [materializeParams]="[{fullwidth:true}]">
+                            <ul class="slides">
+                                <li *ngFor="let slider of offerDetailsViewModel.sliders">
+                                    <a [attr.href]="slider.redirectLink" target="_blank">
+                                        <img class="responsive-img slider-img" src="{{slider.sliderImageUrl}}" alt="{{slider.offerName}}">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a [routerLink]="['/offers']">
+                                        <img class="responsive-img slider-img" src="https://s3-ap-southeast-1.amazonaws.com/paisaclub-sliders/1.png"
+                                            alt="Offers">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a [routerLink]="['/recharge-bill-payment']">
+                                        <img class="responsive-img slider-img" src="https://s3-ap-southeast-1.amazonaws.com/paisaclub-sliders/2.png"
+                                            alt="Recharge & Bill Payment">
+                                    </a>
+                                </li>
+
+                            </ul>
+                            <div class="flex-overlay-slider hide-on-small-only">
+                                <div class="row margin-top-12">
+                                    <span class="center padding-5">
+                                        <button ceiboShare [facebook]="{url:url,text:referral}" class="btn btn-floating waves-effect waves-light light-blue darken-4 tooltipped"
+                                            data-tooltip="Facebook">
+                                            <i class="fa fa-facebook"></i>
+                                        </button>
+                                    </span>
+                                    <span class="center padding-5">
+                                        <button ceiboShare [twitter]="{url:url, text:referral, hashtags:'paisaclub, cashback, referral'}" class="btn waves-effect waves-light blue btn-floating tooltipped"
+                                            data-tooltip="Twitter">
+                                            <i class="fa fa-twitter" aria-hidden="true"></i>
+                                        </button>
+                                    </span>
+                                    <span class="center padding-5">
+                                        <button ceiboShare [googlePlus]="{url:url,text:referral}" class="btn waves-effect waves-light red darken-4 btn-floating tooltipped"
+                                            data-tooltip="Google+">
+                                            <i class="fa fa-google-plus" aria-hidden="true"></i>
+                                        </button>
+                                    </span>
+                                    <span class="center padding-5">
+                                        <button ceiboShare class="btn btn-floating waves-effect waves-light light-blue darken-4 tooltipped" [linkedIn]="{url:url,text:referral}">
+                                            <i class="fa fa-linkedin"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="details">
+            <div class="col s12 m8 l8">
+                <div class="card">
+                    <div class="col s12 col-content-padding-0">
+                        <ul class="tabs tab-demo-active z-depth-1 cyan" materialize="tabs">
+                            <li class="tab col s3">
+                                <a class="white-text waves-effect waves-light active" href="#cashback">Cashback %</a>
+                            </li>
+                            <li class="tab col s3">
+                                <a class="white-text waves-effect waves-light" href="#deals">Coupons</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col s12 col-content-padding-5">
+                        <div id="cashback" class="col s12 white">
+                            <div class="card-content">
+                                <div class="row row-cashback-rate">
+                                    <table class="responsive-table striped">
+                                        <thead>
+                                            <tr>
+                                                <th data-field="id" class="th-90">Category</th>
+                                                <th data-field="name">Cashback</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <ng-template *ngIf="offerDetailsViewModel.offerInfo.GoalDetails?.length > 0;then Eligible else anyEligible"> </ng-template>
+                                            <ng-template #Eligible>
+                                                <tr *ngFor="let goal of offerDetailsViewModel.offerInfo.GoalDetails">
+                                                    <td class="td-90">{{goal.GoalName}}</td>
+                                                    <td>{{goal.Payout}}</td>
+                                                </tr>
+                                            </ng-template>
+                                            <ng-template #anyEligible>
+                                                <tr>
+                                                    <td class="td-90">Make any eligible purchase.</td>
+                                                    <td>{{offerDetailsViewModel.offerInfo.pc_Payout}}</td>
+                                                </tr>
+                                            </ng-template>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="deals" class="col s12 white">
+                            <div class="row" *ngIf="(offerDetailsViewModel.couponDetails)?.length > 0">
+                                <div class="col s12" *ngFor="let coupon of offerDetailsViewModel.couponDetails">
+                                    <div class="card">
+                                        <div class="card-content">
+                                            <p>
+                                                <span class="coupon-code pink darken-1">{{coupon.Code}}</span>
+                                            </p>
+                                            <h5>{{coupon.Title}}</h5>
+                                            <div class="divider"></div>
+                                            <p class="coupon-desc" [innerHTML]='coupon.Description'></p>
+                                        </div>
+                                        <div class="card-action center-align grey lighten-3">
+                                            <a target="_blank" href="/shop/{{offerDetailsViewModel.offerInfo.SEOName}}" class="indigo-text">
+                                                {{coupon.ButtonDisplayText}}
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="(offerDetailsViewModel.couponDetails)?.length == 0">
+                                <div class="col s12 center padding-20">
+                                    <span class="grey-text lighten-1">It's lonely here
+                                        <i class="fa fa-meh-o"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m4 l4">
+                <div class="row">
+                    <div class="col s12 m12 l12 col-padding-0">
+                        <div class="card">
+                            <div class="card-move-up waves-effect waves-block waves-light">
+                                <div class="move-up amber darken-1">
+                                    <div>
+                                        <span class="chart-title white-text">
+                                            <i class="mdi-action-info-outline"></i> INSTRUCTIONS</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-action padding-0">
+                                <div class="col s12 padding-20" [innerHTML]="offerDetailsViewModel.offerInfo.Instructions">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12 m12 l12 col-padding-0">
+                        <div class="card">
+                            <div class="card-move-up waves-effect waves-block waves-light">
+                                <div class="move-up pink darken-1">
+                                    <div>
+                                        <span class="chart-title white-text">
+                                            <i class="mdi-editor-mode-edit"></i> TERMS & CONDITIONS</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-action padding-0">
+                                <div class="col s12 padding-20" [innerHTML]="offerDetailsViewModel.termsAndConditions">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

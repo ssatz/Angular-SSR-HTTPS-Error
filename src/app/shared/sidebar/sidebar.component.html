@@ -1,0 +1,110 @@
+<!--
+  ~ /* Copyright (C) Paisaclub.com - All Rights Reserved
+  ~  * Unauthorized copying of this file, via any medium is strictly prohibited
+  ~  * Proprietary and confidential
+  ~  * Written by Sathish Kumar(satz) <sathish.thi@gmail.com>
+  ~  */
+  -->
+
+<!-- START LEFT SIDEBAR NAV-->
+<aside id="left-sidebar-nav" *ngIf="isSearchboxVisible == false">
+    <ul id="slide-out" class="side-nav leftside-navigation">
+        <div *showAuthed="true">
+            <li class="user-details">
+                <div class="row">
+                    <div class="center-block white-text">
+                        welcome, {{userDetail.name}}
+                    </div>
+
+                </div>
+            </li>
+            <li>
+                <a [routerLink]="['/myaccount/home']">
+                    <i class="mdi-navigation-apps"></i> Dashboard</a>
+            </li>
+            <li>
+                <a [routerLink]="['/myaccount/profile']">
+                    <i class="mdi-social-person"></i> Profile</a>
+            </li>
+            <li>
+                <a [routerLink]="['/myaccount/payment']">
+                    <i class="mdi-action-payment"></i> Payment</a>
+            </li>
+            <li>
+                <a [routerLink]="['/recharge-bill-payment']">
+                    <i class="mdi-action-loyalty"></i> Recharge/Bill</a>
+            </li>
+            <li>
+                <a [routerLink]="['/myaccount/referral']">
+                    <i class="mdi-social-group"></i> Referral</a>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a [routerLink]="['/']">
+                    <i class="mdi-action-home"></i> Home </a>
+            </li>
+            <li>
+                <a [routerLink]="['/category']">
+                    <i class="material-icons">view_agenda</i>Browse By Category </a>
+            </li>
+            <li>
+                <a [routerLink]="['/offers']">
+                    <i class="mdi-action-shopping-cart"></i> Stores </a>
+            </li>
+            <li>
+                <a [routerLink]="['/faq']">
+                    <i class="mdi-communication-live-help"></i> FAQ</a>
+            </li>
+            <li>
+                <a href="#logout-modal" (click)="logoutClick($event)">
+                    <i class="mdi-action-settings-power"></i> Logout</a>
+            </li>
+        </div>
+        <div *showAuthed="false">
+            <li class="user-details">
+                <div class="row">
+                    <div class="center-block white-text">
+                        welcome, GUEST
+                    </div>
+
+                </div>
+            </li>
+            <li>
+                <a href="login" (click)="login($event)">
+                    <i class="mdi-social-person"></i> Login</a>
+            </li>
+            <li>
+                <a href="register" (click)="register($event)">
+                    <i class="mdi-social-person-add"></i> Register</a>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a [routerLink]="['/']">
+                    <i class="mdi-action-home"></i> Home </a>
+            </li>
+            <li>
+                <a [routerLink]="['/category']">
+                    <i class="material-icons">view_agenda</i>Browse By Category </a>
+            </li>
+            <li>
+                <a [routerLink]="['/offers']">
+                    <i class="mdi-action-shopping-cart"></i> Stores</a>
+            </li>
+            <li>
+                <a [routerLink]="['/recharge-bill-payment']">
+                    <i class="mdi-action-loyalty"></i> Recharge/Bill</a>
+            </li>
+            <li>
+                <a [routerLink]="['/faq']">
+                    <i class="mdi-communication-live-help"></i> FAQ</a>
+            </li>
+        </div>
+    </ul>
+    <a href="#" materialize="sideNav" [materializeParams]="[{closeOnClick:true, draggable:true}]" data-activates="slide-out"
+        class="sidebar-collapse btn-floating btn-medium waves-effect waves-light sidebar-color">
+        <i class="mdi-navigation-menu"></i>
+    </a>
+</aside>
+<logout-cmp></logout-cmp>
+<login-modal-cmp></login-modal-cmp>
+<!-- END LEFT SIDEBAR NAV-->
