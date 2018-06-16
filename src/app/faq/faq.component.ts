@@ -6,11 +6,11 @@
  *
  */
 
-import {Component} from "@angular/core";
-import {ActivatedRoute} from "@angular/router";
-import {Observable} from "rxjs";
+import {Component} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Observable} from 'rxjs';
 import {FAQ} from '../models/faq.model';
-import {SeoService, MetaTagsForPages} from "../shared/service/seo.service";
+import {SeoService, MetaTagsForPages} from '../shared/service/seo.service';
 
 
 @Component({
