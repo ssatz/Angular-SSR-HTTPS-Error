@@ -13,6 +13,8 @@
     "serve:ssr": "node dist/server",
     "build:client-and-server-bundles": "ng build --prod && ng run paisaclub-server:server",
     "webpack:server": "webpack --config webpack.server.config.js --progress --colors",
+    "postinstall": "npm run build:ssr",
+    "start:heroku": “node dist/server"
   },
   "private": true,
   "dependencies": {
