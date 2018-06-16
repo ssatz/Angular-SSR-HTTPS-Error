@@ -5,13 +5,13 @@ import {tap} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {Resolve, ActivatedRouteSnapshot} from '@angular/router';
 import {FAQService} from '../shared/service/faq.service';
-import {makeStateKey, TransferState} from '@angular/platform-browser';
-const FAQ_KEY = makeStateKey<any>('faq.result');
+// import {makeStateKey, TransferState} from '@angular/platform-browser';
+// const FAQ_KEY = makeStateKey<any>('faq.result');
 @Injectable()
 export class FAQResolver implements Resolve<any> {
     private result: any;
 
-    constructor(private _faqService: FAQService, private readonly transferState: TransferState) {
+    constructor(private _faqService: FAQService) {
     }
 
     resolve(_route: ActivatedRouteSnapshot): Observable<any> {
@@ -22,6 +22,8 @@ export class FAQResolver implements Resolve<any> {
             return res;
         }
         this.transferState.onSerialize(FAQ_KEY, () => this.result);*/
-        return this._faqService.getFAQs();
+        this.result = this._faqService.getFAQs();
+        console.log(this.result);
+        return this.result;
     }
 }
