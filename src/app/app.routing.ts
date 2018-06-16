@@ -49,7 +49,7 @@ export const routes: Routes = [{
 
 @NgModule({
     imports: [RouterModule.forRoot(routes,
-        { preloadingStrategy: PreloadSelectedModules, useHash: false, initialNavigation: 'enabled' })
+        { useHash: false, initialNavigation: 'enabled' })
     ],
     exports: [RouterModule],
     providers: [PreloadSelectedModules]
