@@ -33,14 +33,14 @@ import { AuthInterceptor } from './shared/service/auth-interceptor.service';
 
 @NgModule({
     imports: [BrowserModule.withServerTransition({ appId: 'paisaclub-server' }),
-        BrowserTransferStateModule,
         MaterializeModule,
         SlideshowModule,
         AppRoutingModule,
         MyAccountModule,
         ProductsModule,
         PagesModule,
-        HttpClientModule
+        HttpClientModule,
+        BrowserTransferStateModule
         // ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
     ],
     declarations: [
