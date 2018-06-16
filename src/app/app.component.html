@@ -1,18 +1,13 @@
-<div *ngIf="!isRedirect;else redirect">
-  <div class="progress slim-progress-bar" *ngIf="loading">
-    <div class="indeterminate"></div>
-  </div>
-  <sg-header></sg-header>
-  <!-- START MAIN -->
+<div>
+<p class="center">
+  <a class="btn" [routerLink]="['/faq']">FAQ</a>
+    <a class="btn" style="margin-left:20px" [routerLink]="['/']">Home</a>
+</p>
   <div id="main">
     <!-- START WRAPPER -->
     <div class="wrapper">
-      <sg-sidebar></sg-sidebar>
       <router-outlet></router-outlet>
     </div>
   </div>
-  <sg-footer></sg-footer>
+
 </div>
-<ng-template #redirect>
-  <router-outlet></router-outlet>
-</ng-template>

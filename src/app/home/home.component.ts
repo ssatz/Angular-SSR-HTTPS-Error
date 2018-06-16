@@ -1,3 +1,4 @@
+
 /*
  *  Copyright (C) Paisaclub.com - All Rights Reserved
  *  * Unauthorized copying of this file, via any medium is strictly prohibited
@@ -5,8 +6,14 @@
  *  * Written by Sathish Kumar(satz) <sathish.thi@gmail.com>
  *
  */
-export interface Aggregations {
-    Category: any;
-    OS: any;
-    Brand: any;
+
+import {Component} from '@angular/core';
+
+
+@Component({
+    selector: 'home-cmp',
+    template: '<p class="center">Your are in Home!</p>'
+
+})
+export class HomeComponent {
 }

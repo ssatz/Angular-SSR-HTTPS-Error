@@ -10,7 +10,6 @@ import {Component} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Observable} from 'rxjs';
 import {FAQ} from '../models/faq.model';
-import {SeoService, MetaTagsForPages} from '../shared/service/seo.service';
 
 
 @Component({
@@ -21,9 +20,7 @@ import {SeoService, MetaTagsForPages} from '../shared/service/seo.service';
 export class FAQComponent {
     public faqs: Observable<FAQ[]>;
 
-    constructor(private _activatedRoute: ActivatedRoute, private seoService: SeoService) {
-        this.seoService.setTitle('FAQ - Earn & Spend Money, Mobile Recharge!');
-        this.seoService.setMetaTag(MetaTagsForPages.DESCRIPTION, 'Paisaclub.com - FAQ');
+    constructor(private _activatedRoute: ActivatedRoute) {
         this.faqs = this._activatedRoute.snapshot.data['faqs'];
     }
 }
