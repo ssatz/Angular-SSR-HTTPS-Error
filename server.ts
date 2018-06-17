@@ -49,7 +49,10 @@ app.engine('html', ngExpressEngine({
 
 
 app.use(compression());
-
+app.use(function (req, res, next) {
+    res.set('accept', '*/*');
+    next();
+  });
 app.set('view engine', 'html');
 app.set('views', join(DIST_FOLDER, 'browser'));
 
