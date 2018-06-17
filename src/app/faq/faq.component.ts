@@ -21,6 +21,7 @@ export class FAQComponent {
     public faqs: Observable<FAQ[]>;
 
     constructor(private _activatedRoute: ActivatedRoute) {
+        console.log(this._activatedRoute.snapshot.data['faqs']);
         this.faqs = this._activatedRoute.snapshot.data['faqs'];
     }
 }

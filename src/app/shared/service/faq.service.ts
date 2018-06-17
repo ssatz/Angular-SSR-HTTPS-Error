@@ -14,8 +14,8 @@ export class FAQService {
     }
 
     getFAQs(): Observable<FAQ[]> {
-        return this._http.get(this.gobalService.API + '/api/v1/faqs').pipe(
-            map((data: { faqs: FAQ[] }) => data.faqs as FAQ[]),
+        return this._http.get(this.gobalService.API + '/posts').pipe(
+            map((data: FAQ[]) => data as FAQ[]),
             catchError((error: any) => observableThrowError(error || 'Server error')));
     }
 }
