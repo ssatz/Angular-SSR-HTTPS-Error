@@ -4,4 +4,6 @@ export interface FAQ
     body:string;
     userId:number;
     id:number;
+    Question:string;
+    Answer:string;
 }

@@ -11,10 +11,10 @@
                 <div class="col s12" *ngFor="let faq of faqs">
                     <ul class="collection with-header">
                         <li class="collection-item" style="background-color:#ECECEB">
-                            <b>{{faq.title}}</b>
+                            <b>{{faq.Question}}</b>
                         </li>
                         <li class="collection-item">
-                            <div [innerHTML]="faq.body"></div>
+                            <div [innerHTML]="faq.Answer"></div>
                         </li>
                     </ul>
                 </div>
