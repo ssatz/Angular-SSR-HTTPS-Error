@@ -61,7 +61,10 @@ app.get('*', (req, res) => {
     res.render('index', {
         req: req,
         res: res
-    });
+    },
+    (err: Error, html: string) => {
+        res.status(html ? 200 : 500).send(html || err.message);
+      });
 });
 
 // Start up the Node server
